@@ -58,8 +58,8 @@ namespace Algo4
             //APROKSYMACJA
 
             t.GaussPartialPivotApproximation();
-            t.GaussPartialPivotSparseApproximation();
-            t.GaussSeidelApproximation();
+            //t.GaussPartialPivotSparseApproximation();
+            //t.GaussSeidelApproximation();
 
             //double[] argumenty = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             //double[] wartosci = { 1.3, 3.5, 4.2, 5.0, 7.0, 8.8, 10.1, 12.5, 13.0, 15.6 };

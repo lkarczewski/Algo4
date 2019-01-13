@@ -225,6 +225,18 @@ namespace Algo4
             Console.WriteLine("Wielomian dla Gauss Partial Pivot: " + p.GetFunctionString());
             Console.WriteLine("Błąd aproksymacji dla Gauss Partial Pivot: " + p.ApproximationError());
             Console.WriteLine();
+
+            StreamWriter writer = new StreamWriter("AproParPivot.csv", append: false);
+            if (writer != null)
+            {
+                Console.WriteLine(rozmiaryMacierzy[0]+" "+rozmiaryMacierzy.Length);
+                for(var i = 0; i < rozmiaryMacierzy.Length; i++)
+                {
+                    writer.WriteLine(String.Format(p.GetResult(rozmiaryMacierzy[i]).ToString()));
+                }
+                
+            }
+            writer.Close();
         }
 
         public void GaussPartialPivotSparseApproximation()
