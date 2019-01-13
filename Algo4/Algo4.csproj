@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApproximationFunction.cs" />
+    <Compile Include="Approximator.cs" />
     <Compile Include="MatrixGenerator.cs" />
     <Compile Include="MyMatrix.cs" />
     <Compile Include="Program.cs" />

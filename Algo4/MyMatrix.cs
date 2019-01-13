@@ -203,15 +203,15 @@ namespace Algo4
 
         public void RightTopTrianglePartialPivotSparse(T[] vector)
         {
-            // select last row that will be used to reduce rows above it
+            // wybrany ostatni rząd to redukowania rzędów powyżej
             for (var selected = Rows() - 1; selected >= 1; selected--)
             {
                 NoLeadingZero(selected);
 
-                // loop on each row above selected row
+                // pętla po każdym rzędzie powyżej
                 for (var current = selected - 1; current >= 0; current--)
                 {
-                    // row already reduced
+                    // trafiono na rząd już zredukowany
                     if ((dynamic)this[current, selected] == 0.0)
                     {
                         continue;
@@ -277,41 +277,6 @@ namespace Algo4
             return Approximation;
         }
 
-        public void Jacobi(T[] bVector, int iter)
-        {
-            var xVector = new T[Columns()];
-            for (var it = 0; it < iter; it++)
-            {
-                var xVectorPrevious = (T[])xVector.Clone();
-                for (var row = 0; row < Rows(); row++)
-                {
-                    xVector[row] = (dynamic)Approximate(bVector, xVectorPrevious, row);
-                }
-            }
-
-            for (var i = 0; i < Rows(); i++)
-            {
-                bVector[i] = xVector[i];
-            }
-        }
-
-        public void Seidel(T[] bVector, int iter)
-        {
-            var xVector = new T[Columns()];
-            for (var it = 0; it < iter; it++)
-            {
-                for (var row = 0; row < Rows(); row++)
-                {
-                    xVector[row] = (dynamic)Approximate(bVector, xVector, row);
-                }
-            }
-
-            for (var i = 0; i < Rows(); i++)
-            {
-                bVector[i] = xVector[i];
-            }
-        }
-
         public int SeidelAccuracy(T[] bVector, double accuracy)
         {
             var xVector = new T[Columns()];
@@ -325,34 +290,6 @@ namespace Algo4
                 for (var row = 0; row < Rows(); row++)
                 {
                     xVector[row] = (dynamic)Approximate(bVector, xVector, row);
-                }
-
-                enoughAccurracy = Math.Abs(VectorNorm(xVector, xVectorFromPreviousIteration)) <= accuracy;
-                iterations++;
-            }
-
-            for (var i = 0; i < Rows(); i++)
-            {
-                bVector[i] = xVector[i];
-            }
-
-            return iterations;
-        }
-
-        public int JacobiAccuracy(T[] bVector, double accuracy)
-        {
-            var xVector = new T[Columns()];
-            var enoughAccurracy = false;
-            int iterations = 0;
-
-            while (!enoughAccurracy)
-            {
-                var xVectorFromPreviousIteration = (T[])xVector.Clone();
-
-                var xVectorPrevious = (T[])xVector.Clone();
-                for (var row = 0; row < Rows(); row++)
-                {
-                    xVector[row] = (dynamic)Approximate(bVector, xVectorPrevious, row);
                 }
 
                 enoughAccurracy = Math.Abs(VectorNorm(xVector, xVectorFromPreviousIteration)) <= accuracy;
