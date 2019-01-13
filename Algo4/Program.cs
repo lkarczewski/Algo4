@@ -15,35 +15,51 @@ namespace Algo4
 
             //TESTY WYDAJNOŚCI
 
-            StreamWriter writer1 = new StreamWriter("CzasGaussPartialPivot.csv", append: true);
-            writer1.WriteLine();
-            writer1.WriteLine("rozmiar;czas");
-            writer1.Close();
-            for (int i = 3; i <= 70; i++)
-            {
-                Console.WriteLine("Ilość agentów: " + i);
-                t.GaussPartialPivotTimeTest(i, 1);
-            }
+            //StreamWriter writer1 = new StreamWriter("CzasGaussPartialPivot.csv", append: true);
+            //writer1.WriteLine();
+            //writer1.WriteLine("rozmiar;czas");
+            //writer1.Close();
+            //for (int i = 3; i <= 70; i++)
+            //{
+            //    Console.WriteLine("Ilość agentów: " + i);
+            //    t.GaussPartialPivotTimeTest(i, 1);
+            //}
 
-            StreamWriter writer2 = new StreamWriter("CzasGaussPartialPivotSparse.csv", append: true);
-            writer2.WriteLine();
-            writer2.WriteLine("rozmiar;czas");
-            writer2.Close();
-            for (int i = 3; i <= 70; i++)
-            {
-                Console.WriteLine("Ilość agentów: " + i);
-                t.GaussPartialPivotSparseTimeTest(i, 1);
-            }
+            //StreamWriter writer2 = new StreamWriter("CzasGaussPartialPivotSparse.csv", append: true);
+            //writer2.WriteLine();
+            //writer2.WriteLine("rozmiar;czas");
+            //writer2.Close();
+            //for (int i = 3; i <= 62; i++)
+            //{
+            //    Console.WriteLine("Ilość agentów: " + i);
+            //    t.GaussPartialPivotSparseTimeTest(i, 1);
+            //}
 
-            StreamWriter writer3 = new StreamWriter("CzasSeidel1e-10.csv", append: true);
-            writer3.WriteLine();
-            writer3.WriteLine("rozmiar", "czas");
-            writer3.Close();
-            for (int i = 3; i <= 70; i ++)
-            {
-                Console.WriteLine("Ilość agentów: " + i);
-                t.SeidelTimeTest(i, 1, 1e-10);
-            }
+            //StreamWriter writer3 = new StreamWriter("CzasSeidel1e-10.csv", append: true);
+            //writer3.WriteLine();
+            //writer3.WriteLine("rozmiar", "czas");
+            //writer3.Close();
+            //for (int i = 3; i <= 62; i ++)
+            //{
+            //    Console.WriteLine("Ilość agentów: " + i);
+            //    t.SeidelTimeTest(i, 1, 1e-10);
+            //}
+
+            //StreamWriter writer4 = new StreamWriter("CzasSeidel1e-10.csv", append: true);
+            //writer4.WriteLine();
+            //writer4.WriteLine("rozmiar", "czas");
+            //writer4.Close();
+            //for (int i = 3; i <= 62; i++)
+            //{
+            //    Console.WriteLine("Ilość agentów: " + i);
+            //    t.GenerateMatrixTimeTest(i,1);
+            //}
+
+            //APROKSYMACJA
+
+            t.GaussPartialPivotApproximation();
+            t.GaussPartialPivotSparseApproximation();
+            t.GaussSeidelApproximation();
 
             //double[] argumenty = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             //double[] wartosci = { 1.3, 3.5, 4.2, 5.0, 7.0, 8.8, 10.1, 12.5, 13.0, 15.6 };

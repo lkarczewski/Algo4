@@ -9,6 +9,20 @@ namespace Algo4
 {
     class Test
     {
+        private double valueFromFile;
+        private double[] valuesFromFile;
+
+        public double[] LoadData(string fileName)
+        {
+            var values = File.ReadAllLines(fileName)
+            .SelectMany(a => a.Split(';')
+            .Select(str => double.TryParse(str, out valueFromFile) ? valueFromFile : 0));
+
+            valuesFromFile = values.ToArray();
+
+            return valuesFromFile;
+        }
+
         public double[] GenerateVector(int size)
         {
             double[] vector = new double[size];
@@ -21,6 +35,38 @@ namespace Algo4
             vector[size - 1] = 1.0;
 
             return vector;
+        }
+
+        public void GenerateMatrixTimeTest(int numberOfAgents, int count)
+        {
+            MatrixGenerator mg = new MatrixGenerator(numberOfAgents);
+            MyMatrix<double> macierz = new MyMatrix<double>(mg.size, mg.size);
+
+            double[] czasy = new double[count];
+            double suma = 0.0;
+            double srednia = 0.0;
+
+            for (var i = 0; i < count; i++)
+            {
+                var watchDouble = Stopwatch.StartNew();
+                macierz = mg.GenerateMatrix();
+                watchDouble.Stop();
+                var elapsedMsDouble = watchDouble.ElapsedMilliseconds;
+                czasy[i] = elapsedMsDouble;
+            }
+
+            srednia = suma / count;
+
+            StreamWriter writer = new StreamWriter("CzasGenerowaniaMacierzy.csv", append: true);
+            if (writer != null)
+            {
+                writer.WriteLine(String.Format(mg.size + ";" + srednia + ";"));
+            }
+            writer.Close();
+
+            Console.WriteLine("Średni czas generowania macierzy" +
+                ": " + srednia + "ms");
+
         }
 
         public void GaussPartialPivotTimeTest(int numberOfAgents, int count)
@@ -71,7 +117,8 @@ namespace Algo4
             }
             writer.Close();
 
-            Console.WriteLine("Średni czas GaussPartialPivot: " + srednia + "ms");
+            Console.WriteLine("Średni czas GaussPartialPivot" +
+                ": " + srednia + "ms");
         }
 
         public void GaussPartialPivotSparseTimeTest(int numberOfAgents, int count)
@@ -169,20 +216,37 @@ namespace Algo4
             Console.WriteLine("Średni czas Seidel " + accuracy + ": " + srednia + "ms");
         }
 
-        //public double LoadData(string fileName)
-        //{
-        //    var reader = new StreamReader(fileName);
-        //    double[] data = new double[];
-        //}
+        public void GaussPartialPivotApproximation()
+        {
+            double[] rozmiaryMacierzy = LoadData("rozmiary.csv");
+            double[] czasWykonania = LoadData("CzasGaussPartialPivot.csv");
 
-        //public void GaussPartialPivotApproximation()
-        //{
-        //    double[] rozmiarMacierzy;
-        //    double[] czasWykonania;
+            var p = Approximator.GetApproximation(3, rozmiaryMacierzy, czasWykonania);
+            Console.WriteLine("Wielomian dla Gauss Partial Pivot: " + p.GetFunctionString());
+            Console.WriteLine("Błąd aproksymacji dla Gauss Partial Pivot: " + p.ApproximationError());
+            Console.WriteLine();
+        }
 
-        //    var p = Approximator.GetApproximation(3, rozmiarMacierzy, czasWykonania);
-        //    Console.WriteLine(p.GetFunctionString());
-        //    Console.WriteLine(p.ApproximationError());
-        //}
+        public void GaussPartialPivotSparseApproximation()
+        {
+            double[] rozmiaryMacierzy = LoadData("rozmiary.csv");
+            double[] czasWykonania = LoadData("CzasGaussPartialPivotSparse.csv");
+
+            var p = Approximator.GetApproximation(2, rozmiaryMacierzy, czasWykonania);
+            Console.WriteLine("Wielomian dla Gauss Partial Pivot Sparse: " + p.GetFunctionString());
+            Console.WriteLine("Błąd aproksymacji dla Gauss Partial Pivot Sparse: " + p.ApproximationError());
+            Console.WriteLine();
+        }
+
+        public void GaussSeidelApproximation()
+        {
+            double[] rozmiaryMacierzy = LoadData("rozmiary.csv");
+            double[] czasWykonania = LoadData("CzasSeidel1e-10.csv");
+
+            var p = Approximator.GetApproximation(2, rozmiaryMacierzy, czasWykonania);
+            Console.WriteLine("Wielomian dla Gauss Seidel 1e-10: " + p.GetFunctionString());
+            Console.WriteLine("Błąd aproksymacji dla Gauss Seidel 1e-10: " + p.ApproximationError());
+            Console.WriteLine();
+        }
     }
 }
