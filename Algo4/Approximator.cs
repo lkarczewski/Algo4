@@ -55,8 +55,8 @@ namespace Algo4
 
             var matrix = new MyMatrix<double>(rMatrix);
             matrix.GaussPartialPivot(rVector);
-            
-            return new ApproximationFunction(rVector,arguments,values);
+
+            return new ApproximationFunction(rVector, arguments, values);
         }
     }
 }

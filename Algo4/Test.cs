@@ -53,6 +53,7 @@ namespace Algo4
                 watchDouble.Stop();
                 var elapsedMsDouble = watchDouble.ElapsedMilliseconds;
                 czasy[i] = elapsedMsDouble;
+                suma += czasy[i];
             }
 
             srednia = suma / count;
@@ -226,15 +227,15 @@ namespace Algo4
             Console.WriteLine("Błąd aproksymacji dla Gauss Partial Pivot: " + p.ApproximationError());
             Console.WriteLine();
 
-            StreamWriter writer = new StreamWriter("AproParPivot.csv", append: false);
+            StreamWriter writer = new StreamWriter("ApproximatePartialPivot.csv", append: false);
             if (writer != null)
             {
-                Console.WriteLine(rozmiaryMacierzy[0]+" "+rozmiaryMacierzy.Length);
-                for(var i = 0; i < rozmiaryMacierzy.Length; i++)
+                Console.WriteLine(rozmiaryMacierzy[0] + " " + rozmiaryMacierzy.Length);
+                for (var i = 0; i < rozmiaryMacierzy.Length; i++)
                 {
                     writer.WriteLine(String.Format(p.GetResult(rozmiaryMacierzy[i]).ToString()));
                 }
-                
+
             }
             writer.Close();
         }
@@ -248,6 +249,18 @@ namespace Algo4
             Console.WriteLine("Wielomian dla Gauss Partial Pivot Sparse: " + p.GetFunctionString());
             Console.WriteLine("Błąd aproksymacji dla Gauss Partial Pivot Sparse: " + p.ApproximationError());
             Console.WriteLine();
+
+            StreamWriter writer = new StreamWriter("ApproximatePivotSparse.csv", append: false);
+            if (writer != null)
+            {
+                Console.WriteLine(rozmiaryMacierzy[0] + " " + rozmiaryMacierzy.Length);
+                for (var i = 0; i < rozmiaryMacierzy.Length; i++)
+                {
+                    writer.WriteLine(String.Format(p.GetResult(rozmiaryMacierzy[i]).ToString()));
+                }
+
+            }
+            writer.Close();
         }
 
         public void GaussSeidelApproximation()
@@ -259,6 +272,18 @@ namespace Algo4
             Console.WriteLine("Wielomian dla Gauss Seidel 1e-10: " + p.GetFunctionString());
             Console.WriteLine("Błąd aproksymacji dla Gauss Seidel 1e-10: " + p.ApproximationError());
             Console.WriteLine();
+
+            StreamWriter writer = new StreamWriter("ApproximateSeidel.csv", append: false);
+            if (writer != null)
+            {
+                Console.WriteLine(rozmiaryMacierzy[0] + " " + rozmiaryMacierzy.Length);
+                for (var i = 0; i < rozmiaryMacierzy.Length; i++)
+                {
+                    writer.WriteLine(String.Format(p.GetResult(rozmiaryMacierzy[i]).ToString()));
+                }
+
+            }
+            writer.Close();
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Algo4
             var output = string.Empty;
             for (var i = 0; i < Polynomial.Length; i++)
             {
-                output += $"{Math.Round(Polynomial[i],4)}*x^{i} + ";
+                output += $"{Math.Round(Polynomial[i], 10)}*x^{i} + ";
             }
 
             return output;
