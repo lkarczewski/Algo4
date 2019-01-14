@@ -61,7 +61,7 @@ namespace Algo4
             StreamWriter writer = new StreamWriter("CzasGenerowaniaMacierzy.csv", append: true);
             if (writer != null)
             {
-                writer.WriteLine(String.Format(mg.size + ";" + srednia + ";"));
+                writer.WriteLine(srednia);
             }
             writer.Close();
 
@@ -114,7 +114,7 @@ namespace Algo4
             StreamWriter writer = new StreamWriter("CzasGaussPartialPivot.csv", append: true);
             if (writer != null)
             {
-                writer.WriteLine(String.Format(mg.size + ";" + srednia + ";"));
+                writer.WriteLine(srednia);
             }
             writer.Close();
 
@@ -166,7 +166,7 @@ namespace Algo4
             StreamWriter writer = new StreamWriter("CzasGaussPartialPivotSparse.csv", append: true);
             if (writer != null)
             {
-                writer.WriteLine(String.Format(mg.size + ";" + srednia + ";"));
+                writer.WriteLine(srednia);
             }
             writer.Close();
 
@@ -210,7 +210,7 @@ namespace Algo4
             StreamWriter writer = new StreamWriter(name, append: true);
             if (writer != null)
             {
-                writer.WriteLine(String.Format(mg.size + ";" + srednia + ";"));
+                writer.WriteLine(srednia);
             }
             writer.Close();
 
@@ -224,7 +224,8 @@ namespace Algo4
 
             var p = Approximator.GetApproximation(3, rozmiaryMacierzy, czasWykonania);
             Console.WriteLine("Wielomian dla Gauss Partial Pivot: " + p.GetFunctionString());
-            Console.WriteLine("Błąd aproksymacji dla Gauss Partial Pivot: " + p.ApproximationError());
+            Console.WriteLine("Szacowany czas 100000x100000: " + (p.GetResult(100000))/3600000);
+            //Console.WriteLine("Błąd aproksymacji dla Gauss Partial Pivot: " + p.ApproximationError());
             Console.WriteLine();
 
             StreamWriter writer = new StreamWriter("ApproximatePartialPivot.csv", append: false);
@@ -247,20 +248,21 @@ namespace Algo4
 
             var p = Approximator.GetApproximation(2, rozmiaryMacierzy, czasWykonania);
             Console.WriteLine("Wielomian dla Gauss Partial Pivot Sparse: " + p.GetFunctionString());
-            Console.WriteLine("Błąd aproksymacji dla Gauss Partial Pivot Sparse: " + p.ApproximationError());
-            Console.WriteLine();
+            Console.WriteLine("Szacowany czas 100000x100000: " + (p.GetResult(100000)) / 3600000);
+            //Console.WriteLine("Błąd aproksymacji dla Gauss Partial Pivot Sparse: " + p.ApproximationError());
+            //Console.WriteLine();
 
-            StreamWriter writer = new StreamWriter("ApproximatePivotSparse.csv", append: false);
-            if (writer != null)
-            {
-                Console.WriteLine(rozmiaryMacierzy[0] + " " + rozmiaryMacierzy.Length);
-                for (var i = 0; i < rozmiaryMacierzy.Length; i++)
-                {
-                    writer.WriteLine(String.Format(p.GetResult(rozmiaryMacierzy[i]).ToString()));
-                }
+            //StreamWriter writer = new StreamWriter("ApproximatePivotSparse.csv", append: false);
+            //if (writer != null)
+            //{
+            //    Console.WriteLine(rozmiaryMacierzy[0] + " " + rozmiaryMacierzy.Length);
+            //    for (var i = 0; i < rozmiaryMacierzy.Length; i++)
+            //    {
+            //        writer.WriteLine(String.Format(p.GetResult(rozmiaryMacierzy[i]).ToString()));
+            //    }
 
-            }
-            writer.Close();
+            //}
+            //writer.Close();
         }
 
         public void GaussSeidelApproximation()
@@ -270,7 +272,8 @@ namespace Algo4
 
             var p = Approximator.GetApproximation(2, rozmiaryMacierzy, czasWykonania);
             Console.WriteLine("Wielomian dla Gauss Seidel 1e-10: " + p.GetFunctionString());
-            Console.WriteLine("Błąd aproksymacji dla Gauss Seidel 1e-10: " + p.ApproximationError());
+            Console.WriteLine("Szacowany czas 100000x100000: " + (p.GetResult(100000)) / 3600000);
+            //Console.WriteLine("Błąd aproksymacji dla Gauss Seidel 1e-10: " + p.ApproximationError());
             Console.WriteLine();
 
             StreamWriter writer = new StreamWriter("ApproximateSeidel.csv", append: false);
