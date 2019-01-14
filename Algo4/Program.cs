@@ -57,9 +57,9 @@ namespace Algo4
 
             //APROKSYMACJA
 
-            //t.GaussPartialPivotApproximation();
+            t.GaussPartialPivotApproximation();
             t.GaussPartialPivotSparseApproximation();
-            //t.GaussSeidelApproximation();
+            t.GaussSeidelApproximation();
 
             //////////////////////////////////////
 

@@ -39,7 +39,7 @@ namespace Algo4
                 approximationError += Math.Pow(Values[i] - GetResult(Arguments[i]), 2);
             }
 
-            return approximationError;
+            return Math.Sqrt(approximationError);
         }
 
         public string GetFunctionString()
